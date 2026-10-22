@@ -1,0 +1,12 @@
+# Decisions
+
+- 2026-10-22 — Confirmed problem statement from Oct 19 doc: students struggle to identify common ground and start/maintain conversations due to fear of judgment, rejection, or embarrassment, leading to avoided interactions and missed connections. Why: team confirmed the takeaway as still right.
+- 2026-10-22 — Target user is any student at a club fair, social, or campus event trying to talk to strangers, broadened to include classes and other group settings. Why: team selected the event case, then corrected scope to "not only event, classes too and other."
+- 2026-10-22 — Current workaround captured: students stick to friends they came with, wait for a mutual friend, use generic major/hometown small talk, or look at their phone. Why: team selected these as what happens today.
+- 2026-10-22 — Confirmed objective: help students identify common ground fast, maintain conversation, and connect with others outside the classroom. Why: team confirmed the takeaway as still right.
+- 2026-10-22 — Success defined as conversation going beyond generic small talk because real common ground was found, plus student feeling less anxious / more confident afterwards. Why: team chose options B and D; exact measurement remains [OPEN].
+- 2026-10-22 — Solutions kept for consideration: (1) share interests before talking, (3) structured low-pressure ice-breaker activity, (5) after-hello confidence/follow-up helper. Why: team selected 1, 3, 5 from five options presented.
+- 2026-10-22 — Leading solution candidate is option 3: structured ice-breaker activity at the start of an event, class, or other setting. Why: team said it helps set a common ground and removes the need to invent an opener; outliers who do not engage remain a known hard part.
+- 2026-10-22 — If two people do not vibe, they get matched with someone else. Why: team said not vibing is a personal opinion and re-matching keeps them from feeling stuck.
+- 2026-10-22 — Captured potential features A–F (quick join, brief interest-sharing, pairing + re-match, adaptable activities/prompts, timed rotation, after-activity prompts/contact exchange) without prioritizing. Why: team said yes to all; prioritization deferred to Thursday's sprint.
+- 2026-10-22 — Out of scope: dating/romantic matching, general social-media feed, guaranteeing lasting friendships or mental-health support, and discovering/booking events or classes. Why: team selected A, B, C, D as deliberately not doing.
