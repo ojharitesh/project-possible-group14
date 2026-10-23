@@ -26,3 +26,19 @@ Research to do:
 Who's doing what:
 - [OPEN] Not assigned in this session. Team: Ritesh Ojha (Leader), Zhiyang Lin, Ziyi Lian, Aaryan Atreya.
 - Thursday: prioritize features and narrow scope.
+
+## 2026-10-22 (evening) — v1 plan and clickable prototype
+
+What we did:
+- PRD review: narrowed first version to campus club events and socials, chose organizer-led, set success metrics (shared interest yes/no + confidence 1–5 before/after), named the project WarmUp.
+- Planned v1 for one job, "Quickly identify common interest": `implementation-plan/plan.md`. Other jobs and ideas went to `prd/backlog.md`.
+- Built `repo-app-name/index.html` one screen at a time, with a team check after each: Join (#home), Interests (#interests), Match (#match), Wrap-up (#wrapup). Removed the "[Sample]" label and redesigned the event card on team feedback.
+
+Open questions:
+- [OPEN] User interview findings, including whether students would join an organizer-led activity.
+- [OPEN] What confidence improvement counts as success.
+- [OPEN] Design system: `repo-app-name/design-system/` is empty; the prototype uses a simple warm orange style.
+
+Next:
+- Have other students try the prototype on their own laptops and note what confuses them.
+- [OPEN] Who runs the tests and who collects notes.

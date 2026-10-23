@@ -1,0 +1,881 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>WarmUp</title>
+  <style>
+    :root {
+      --bg: #fff8f1;
+      --card: #ffffff;
+      --ink: #2b2118;
+      --muted: #7a6a5c;
+      --brand: #e8663d;
+      --brand-dark: #c94f29;
+      --soft: #ffe9dc;
+      --line: #f0dccd;
+      --radius: 16px;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background: var(--bg);
+      color: var(--ink);
+      line-height: 1.5;
+    }
+
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      padding: 12px 20px;
+      background: var(--card);
+      border-bottom: 1px solid var(--line);
+      flex-wrap: wrap;
+    }
+
+    .logo {
+      font-weight: 800;
+      font-size: 20px;
+      color: var(--brand);
+      margin-right: auto;
+      text-decoration: none;
+    }
+
+    nav a.tab {
+      padding: 6px 12px;
+      border-radius: 999px;
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 14px;
+    }
+
+    nav a.tab:hover { background: var(--soft); color: var(--ink); }
+    nav a.tab.active { background: var(--brand); color: #fff; }
+
+    main {
+      max-width: 520px;
+      margin: 32px auto;
+      padding: 0 20px;
+    }
+
+    .card {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 28px;
+      box-shadow: 0 4px 16px rgba(43, 33, 24, 0.05);
+    }
+
+    .step { font-size: 13px; color: var(--muted); margin: 0 0 4px; }
+    h1 { font-size: 26px; margin: 0 0 8px; }
+    h2 { font-size: 18px; margin: 24px 0 8px; }
+    p { margin: 0 0 12px; }
+    .muted { color: var(--muted); }
+
+    .event {
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      overflow: hidden;
+      margin: 20px 0 28px;
+    }
+
+    .event-top {
+      background: var(--soft);
+      padding: 16px 18px;
+    }
+
+    .eyebrow {
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--brand-dark);
+      margin: 0 0 4px;
+    }
+
+    .event .name { font-weight: 700; font-size: 19px; margin: 0 0 10px; }
+
+    .event-details {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px 18px;
+      font-size: 14px;
+      color: var(--muted);
+    }
+
+    .detail { display: inline-flex; align-items: center; gap: 6px; }
+    .detail svg { width: 16px; height: 16px; flex-shrink: 0; }
+
+    .host {
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+      padding: 16px 18px;
+      background: var(--card);
+    }
+
+    .avatar {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: var(--brand);
+      color: #fff;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .host-name { font-size: 14px; font-weight: 600; margin: 0; }
+    .host-role { font-weight: 400; color: var(--muted); }
+    .welcome { margin: 4px 0 0; font-size: 15px; }
+
+    label { display: block; font-weight: 600; margin-bottom: 6px; }
+
+    input[type="text"] {
+      width: 100%;
+      padding: 12px 14px;
+      font-size: 16px;
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      outline: none;
+    }
+
+    input[type="text"]:focus { border-color: var(--brand); }
+
+    .hint { font-size: 13px; color: var(--muted); margin-top: 6px; }
+
+    button {
+      font: inherit;
+      cursor: pointer;
+      border: none;
+      border-radius: 999px;
+      padding: 12px 22px;
+      font-weight: 600;
+    }
+
+    .primary { background: var(--brand); color: #fff; width: 100%; margin-top: 20px; }
+    .primary:hover { background: var(--brand-dark); }
+    .primary:disabled { background: #e9c9b8; cursor: not-allowed; }
+
+    .error { color: #b3261e; font-size: 14px; margin-top: 8px; min-height: 20px; }
+
+    footer {
+      text-align: center;
+      font-size: 13px;
+      color: var(--muted);
+      margin: 24px 0 40px;
+    }
+
+    footer button {
+      background: none;
+      color: var(--muted);
+      text-decoration: underline;
+      padding: 4px;
+      font-weight: 400;
+    }
+
+
+    .section-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin: 24px 0 10px;
+    }
+
+    .section-head h2 { margin: 0; }
+    .counter { font-size: 14px; color: var(--muted); }
+    .counter.ready { color: var(--brand-dark); font-weight: 600; }
+
+    .chips { display: flex; flex-wrap: wrap; gap: 8px; }
+
+    .chip {
+      display: inline-block;
+      background: var(--card);
+      color: var(--ink);
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      padding: 8px 16px;
+      font-weight: 500;
+    }
+
+    .chip:hover { border-color: var(--brand); }
+    .chip.selected { background: var(--brand); border-color: var(--brand); color: #fff; }
+    .chip:disabled { opacity: 0.4; cursor: not-allowed; }
+    .chip:disabled:hover { border-color: var(--line); }
+
+    .scale { display: flex; gap: 8px; }
+
+    .scale button {
+      flex: 1;
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 12px 0;
+      font-size: 17px;
+      color: var(--ink);
+    }
+
+    .scale button:hover { border-color: var(--brand); }
+    .scale button.selected { background: var(--brand); border-color: var(--brand); color: #fff; }
+
+    .scale-labels {
+      display: flex;
+      justify-content: space-between;
+      font-size: 13px;
+      color: var(--muted);
+      margin-top: 6px;
+    }
+
+    .notice {
+      background: var(--soft);
+      border-radius: 12px;
+      padding: 14px 16px;
+      margin-top: 16px;
+    }
+
+    .notice a { color: var(--brand-dark); font-weight: 600; }
+
+    #continue-hint { text-align: center; margin: 10px 0 0; }
+    #continue-hint:empty { display: none; }
+
+    .match-card {
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 20px;
+      margin: 20px 0;
+    }
+
+    .person { display: flex; align-items: center; gap: 14px; }
+    .person .avatar { width: 52px; height: 52px; font-size: 22px; }
+    .person-name { font-size: 20px; font-weight: 700; margin: 0; }
+    .person-year { font-size: 14px; color: var(--muted); margin: 0; }
+
+    .label {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--muted);
+      margin: 18px 0 8px;
+    }
+
+    .chip.static { cursor: default; }
+    .chip.shared { background: var(--brand); border-color: var(--brand); color: #fff; cursor: pointer; }
+    .chip.shared.current { box-shadow: 0 0 0 3px var(--soft), 0 0 0 5px var(--brand); }
+    .chip.other { color: var(--muted); background: var(--bg); }
+
+    .opener {
+      background: var(--soft);
+      border-radius: 12px;
+      padding: 16px;
+      margin-top: 4px;
+    }
+
+    .opener .eyebrow { margin-bottom: 6px; }
+    .opener-text { font-size: 17px; font-weight: 600; margin: 0; }
+
+    .actions { display: flex; gap: 10px; margin-top: 20px; }
+    .actions button { flex: 1; margin: 0; white-space: nowrap; padding: 12px 14px; }
+
+    .secondary {
+      background: var(--card);
+      color: var(--ink);
+      border: 1px solid var(--line);
+    }
+
+    .secondary:hover { border-color: var(--brand); }
+
+    .match-count { text-align: center; font-size: 13px; color: var(--muted); margin: 12px 0 0; }
+
+    .choice { display: flex; gap: 10px; }
+
+    .choice button {
+      flex: 1;
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 14px 0;
+      color: var(--ink);
+    }
+
+    .choice button:hover { border-color: var(--brand); }
+    .choice button.selected { background: var(--brand); border-color: var(--brand); color: #fff; }
+
+    .thanks { text-align: center; }
+
+    .thanks-badge {
+      width: 64px;
+      height: 64px;
+      border-radius: 50%;
+      background: var(--soft);
+      color: var(--brand);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 4px auto 16px;
+    }
+
+    .thanks-badge svg { width: 30px; height: 30px; }
+
+    .summary {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin: 20px 0 4px;
+      text-align: left;
+    }
+
+    .summary-item {
+      background: var(--bg);
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 14px;
+    }
+
+    .summary-item .label { margin: 0 0 4px; }
+    .summary-value { font-size: 18px; font-weight: 700; margin: 0; }
+    .summary-item.wide { grid-column: 1 / -1; }
+  </style>
+</head>
+<body>
+  <nav>
+    <a class="logo" href="#home">WarmUp</a>
+    <a class="tab" href="#home" data-route="home">1. Join</a>
+    <a class="tab" href="#interests" data-route="interests">2. Interests</a>
+    <a class="tab" href="#match" data-route="match">3. Match</a>
+    <a class="tab" href="#wrapup" data-route="wrapup">4. Wrap-up</a>
+  </nav>
+
+  <main id="app"></main>
+
+  <footer>
+    WarmUp prototype. Everything stays in this browser.
+    <br />
+    <button type="button" id="reset">Reset demo</button>
+  </footer>
+
+  <script>
+    // ---------- Sample data (fictional, demo only) ----------
+    const EVENT = {
+      name: "Outdoor Club Fall Social",
+      hostName: "Maya",
+      hostRole: "Outdoor Club president",
+      where: "Student Center, Room 204",
+      when: "Thursday, 7:00 PM",
+      welcome: "Welcome in! Grab a snack, join WarmUp, and meet someone new tonight."
+    };
+
+    const INTERESTS = [
+      "Hiking", "Gaming", "Cooking", "Music", "Basketball", "Anime",
+      "Photography", "Coffee", "Movies", "Travel", "Coding", "Art"
+    ];
+
+    const OPENERS = {
+      Hiking: "Ask what trail they did last, and whether they'd go back.",
+      Gaming: "Ask what game they've been playing way too much lately.",
+      Cooking: "Ask what their go-to dish is when they actually have time to cook.",
+      Music: "Ask what song they've had on repeat this week.",
+      Basketball: "Ask if they play pickup on campus, and when.",
+      Anime: "Ask what show they'd recommend to someone just starting out.",
+      Photography: "Ask what the best photo they've taken this semester is.",
+      Coffee: "Ask where the best coffee on campus is.",
+      Movies: "Ask what the last movie they'd actually recommend was.",
+      Travel: "Ask where they'd go if they had one free week.",
+      Coding: "Ask what they're building right now, even if it's tiny.",
+      Art: "Ask what they like to make, and what got them started."
+    };
+
+    const ATTENDEES = [
+      { name: "Jordan", year: "Sophomore", interests: ["Hiking", "Coffee", "Photography", "Music"] },
+      { name: "Priya", year: "First-year", interests: ["Cooking", "Anime", "Art", "Coffee"] },
+      { name: "Marcus", year: "Junior", interests: ["Basketball", "Gaming", "Movies"] },
+      { name: "Elena", year: "Senior", interests: ["Travel", "Photography", "Hiking", "Cooking"] },
+      { name: "Sam", year: "Sophomore", interests: ["Coding", "Gaming", "Music", "Anime"] },
+      { name: "Tasha", year: "First-year", interests: ["Art", "Movies", "Travel", "Basketball"] }
+    ];
+
+    // ---------- Local storage ----------
+    const STORAGE_KEY = "warmup-v1";
+
+    function loadState() {
+      try {
+        return JSON.parse(localStorage.getItem(STORAGE_KEY)) || {};
+      } catch {
+        return {};
+      }
+    }
+
+    function saveState(patch) {
+      const next = { ...loadState(), ...patch };
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(next));
+      return next;
+    }
+
+    // ---------- Helpers ----------
+    function escapeHtml(text) {
+      const div = document.createElement("div");
+      div.textContent = text;
+      return div.innerHTML;
+    }
+
+    // ---------- Screens ----------
+    function renderHome() {
+      const state = loadState();
+      const savedName = state.name || "";
+
+      app.innerHTML = `
+        <div class="card">
+          <p class="step">Step 1 of 4</p>
+          <h1>Meet someone new tonight</h1>
+          <p class="muted">WarmUp shows you what you have in common with another attendee, so you don't have to come up with an opener on the spot.</p>
+
+          <div class="event">
+            <div class="event-top">
+              <p class="eyebrow">Tonight's event</p>
+              <p class="name">${EVENT.name}</p>
+              <div class="event-details">
+                <span class="detail">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
+                  ${EVENT.when}
+                </span>
+                <span class="detail">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 21s-7-6.2-7-11a7 7 0 0 1 14 0c0 4.8-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>
+                  ${EVENT.where}
+                </span>
+              </div>
+            </div>
+            <div class="host">
+              <div class="avatar">${EVENT.hostName.charAt(0)}</div>
+              <div>
+                <p class="host-name">${EVENT.hostName} <span class="host-role">&middot; ${EVENT.hostRole}</span></p>
+                <p class="welcome">${EVENT.welcome}</p>
+              </div>
+            </div>
+          </div>
+
+          <form id="join-form" novalidate>
+            <label for="first-name">Your first name</label>
+            <input type="text" id="first-name" maxlength="30" autocomplete="off"
+              placeholder="e.g. Alex" value="${escapeHtml(savedName)}" />
+            <p class="hint">Only your first name or a nickname. It stays in this browser.</p>
+            <p class="error" id="name-error"></p>
+            <button type="submit" class="primary">Join WarmUp</button>
+          </form>
+        </div>
+      `;
+
+      const form = document.getElementById("join-form");
+      const input = document.getElementById("first-name");
+      const error = document.getElementById("name-error");
+
+      form.addEventListener("submit", (e) => {
+        e.preventDefault();
+        const name = input.value.trim();
+        if (!name) {
+          error.textContent = "Add your first name so your match knows what to call you.";
+          input.focus();
+          return;
+        }
+        saveState({ name });
+        location.hash = "#interests";
+      });
+    }
+
+    const MIN_INTERESTS = 3;
+    const MAX_INTERESTS = 5;
+
+    function renderInterests() {
+      const state = loadState();
+
+      if (!state.name) {
+        app.innerHTML = `
+          <div class="card">
+            <p class="step">Step 2 of 4</p>
+            <h1>Pick your interests</h1>
+            <div class="notice">Join the event first so we know who you are. <a href="#home">Go to Join</a></div>
+          </div>
+        `;
+        return;
+      }
+
+      let selected = (state.interests || []).filter((i) => INTERESTS.includes(i));
+      let confidence = state.confidenceBefore || null;
+
+      app.innerHTML = `
+        <div class="card">
+          <p class="step">Step 2 of 4</p>
+          <h1>Hi ${escapeHtml(state.name)}, what are you into?</h1>
+          <p class="muted">Pick ${MIN_INTERESTS} to ${MAX_INTERESTS} things. We'll use them to show what you have in common with someone here.</p>
+
+          <div class="section-head">
+            <h2>Your interests</h2>
+            <span class="counter" id="counter"></span>
+          </div>
+          <div class="chips" id="chips">
+            ${INTERESTS.map((i) => `<button type="button" class="chip" data-interest="${i}">${i}</button>`).join("")}
+          </div>
+
+          <h2>How confident do you feel talking to someone new right now?</h2>
+          <div class="scale" id="scale">
+            ${[1, 2, 3, 4, 5].map((n) => `<button type="button" data-value="${n}" aria-label="${n} out of 5">${n}</button>`).join("")}
+          </div>
+          <div class="scale-labels"><span>Not at all</span><span>Very confident</span></div>
+
+          <button type="button" class="primary" id="continue">Find my match</button>
+          <p class="hint" id="continue-hint"></p>
+        </div>
+      `;
+
+      const chips = [...document.querySelectorAll("#chips .chip")];
+      const scaleButtons = [...document.querySelectorAll("#scale button")];
+      const counter = document.getElementById("counter");
+      const continueBtn = document.getElementById("continue");
+      const continueHint = document.getElementById("continue-hint");
+
+      function update() {
+        const full = selected.length >= MAX_INTERESTS;
+        chips.forEach((chip) => {
+          const isOn = selected.includes(chip.dataset.interest);
+          chip.classList.toggle("selected", isOn);
+          chip.disabled = full && !isOn;
+          chip.setAttribute("aria-pressed", isOn);
+        });
+        scaleButtons.forEach((btn) => {
+          btn.classList.toggle("selected", Number(btn.dataset.value) === confidence);
+        });
+        counter.textContent = `${selected.length} of ${MAX_INTERESTS} picked`;
+        counter.classList.toggle("ready", selected.length >= MIN_INTERESTS);
+        continueBtn.disabled = selected.length < MIN_INTERESTS || !confidence;
+        if (selected.length < MIN_INTERESTS) {
+          continueHint.textContent = `Pick ${MIN_INTERESTS - selected.length} more interest${MIN_INTERESTS - selected.length === 1 ? "" : "s"} to continue.`;
+        } else if (!confidence) {
+          continueHint.textContent = "Rate how confident you feel to continue.";
+        } else {
+          continueHint.textContent = "";
+        }
+        saveState({ interests: selected, confidenceBefore: confidence });
+      }
+
+      chips.forEach((chip) => {
+        chip.addEventListener("click", () => {
+          const interest = chip.dataset.interest;
+          selected = selected.includes(interest)
+            ? selected.filter((i) => i !== interest)
+            : [...selected, interest];
+          update();
+        });
+      });
+
+      scaleButtons.forEach((btn) => {
+        btn.addEventListener("click", () => {
+          confidence = Number(btn.dataset.value);
+          update();
+        });
+      });
+
+      continueBtn.addEventListener("click", () => {
+        saveState({ interests: selected, confidenceBefore: confidence, matchIndex: 0 });
+        location.hash = "#match";
+      });
+
+      update();
+    }
+
+    function rankedMatches(myInterests) {
+      return ATTENDEES
+        .map((person, order) => ({
+          ...person,
+          order,
+          shared: person.interests.filter((i) => myInterests.includes(i))
+        }))
+        .sort((a, b) => b.shared.length - a.shared.length || a.order - b.order);
+    }
+
+    function renderMatch() {
+      const state = loadState();
+
+      if (!state.name || !state.interests || state.interests.length < MIN_INTERESTS) {
+        const missingName = !state.name;
+        app.innerHTML = `
+          <div class="card">
+            <p class="step">Step 3 of 4</p>
+            <h1>Your match</h1>
+            <div class="notice">
+              ${missingName
+                ? `Join the event first. <a href="#home">Go to Join</a>`
+                : `Pick your interests first so we can find common ground. <a href="#interests">Pick interests</a>`}
+            </div>
+          </div>
+        `;
+        return;
+      }
+
+      const matches = rankedMatches(state.interests);
+      const index = (state.matchIndex || 0) % matches.length;
+      const match = matches[index];
+      const others = match.interests.filter((i) => !match.shared.includes(i));
+      let openerTopic = match.shared[0] || null;
+
+      app.innerHTML = `
+        <div class="card">
+          <p class="step">Step 3 of 4</p>
+          <h1>${match.shared.length ? "You have something in common" : "Here's someone new to meet"}</h1>
+          <p class="muted">Look for ${escapeHtml(match.name)} at the event and say hi.</p>
+
+          <div class="match-card">
+            <div class="person">
+              <div class="avatar">${match.name.charAt(0)}</div>
+              <div>
+                <p class="person-name">${escapeHtml(match.name)}</p>
+                <p class="person-year">${match.year} &middot; at ${EVENT.name}</p>
+              </div>
+            </div>
+
+            ${match.shared.length ? `
+              <p class="label">YOU BOTH LIKE${match.shared.length > 1 ? " (tap one to change the opener)" : ""}</p>
+              <div class="chips" id="shared-chips">
+                ${match.shared.map((i) => `<button type="button" class="chip shared" data-topic="${i}">${i}</button>`).join("")}
+              </div>
+            ` : `
+              <p class="label">NO SHARED INTERESTS</p>
+              <p class="muted">You don't overlap on your picks. Try a re-match, or ask about one of theirs.</p>
+            `}
+
+            ${others.length ? `
+              <p class="label">${escapeHtml(match.name).toUpperCase()} ALSO LIKES</p>
+              <div class="chips">
+                ${others.map((i) => `<span class="chip static other">${i}</span>`).join("")}
+              </div>
+            ` : ""}
+          </div>
+
+          <div class="opener">
+            <p class="eyebrow">Try this opener</p>
+            <p class="opener-text" id="opener-text"></p>
+          </div>
+
+          <div class="actions">
+            <button type="button" class="secondary" id="rematch">Not vibing? Re-match</button>
+            <button type="button" class="primary" id="talked">We talked</button>
+          </div>
+          <p class="match-count">Match ${index + 1} of ${matches.length}</p>
+        </div>
+      `;
+
+      const openerText = document.getElementById("opener-text");
+      const sharedChips = [...document.querySelectorAll("#shared-chips .chip")];
+
+      function showOpener() {
+        const topic = openerTopic || match.interests[0];
+        openerText.textContent = OPENERS[topic];
+        sharedChips.forEach((chip) => chip.classList.toggle("current", chip.dataset.topic === openerTopic));
+      }
+
+      sharedChips.forEach((chip) => {
+        chip.addEventListener("click", () => {
+          openerTopic = chip.dataset.topic;
+          showOpener();
+        });
+      });
+
+      document.getElementById("rematch").addEventListener("click", () => {
+        saveState({ matchIndex: (index + 1) % matches.length });
+        renderMatch();
+        window.scrollTo(0, 0);
+      });
+
+      document.getElementById("talked").addEventListener("click", () => {
+        saveState({
+          matchedWith: match.name,
+          sharedWith: match.shared,
+          foundShared: null,
+          confidenceAfter: null,
+          finished: false
+        });
+        location.hash = "#wrapup";
+      });
+
+      showOpener();
+    }
+
+    function renderWrapup() {
+      const state = loadState();
+
+      if (!state.matchedWith) {
+        app.innerHTML = `
+          <div class="card">
+            <p class="step">Step 4 of 4</p>
+            <h1>Wrap-up</h1>
+            <div class="notice">Meet your match first, then come back here. <a href="#match">Go to your match</a></div>
+          </div>
+        `;
+        return;
+      }
+
+      if (state.finished) {
+        renderThanks(state);
+        return;
+      }
+
+      let foundShared = typeof state.foundShared === "boolean" ? state.foundShared : null;
+      let confidence = state.confidenceAfter || null;
+
+      app.innerHTML = `
+        <div class="card">
+          <p class="step">Step 4 of 4</p>
+          <h1>How did it go with ${escapeHtml(state.matchedWith)}?</h1>
+          <p class="muted">Two quick questions. Your answers stay in this browser.</p>
+
+          <h2>Did you discover a genuine shared interest?</h2>
+          <div class="choice" id="shared-choice">
+            <button type="button" data-value="yes">Yes</button>
+            <button type="button" data-value="no">No</button>
+          </div>
+
+          <h2>How confident do you feel talking to someone new now?</h2>
+          <div class="scale" id="scale">
+            ${[1, 2, 3, 4, 5].map((n) => `<button type="button" data-value="${n}" aria-label="${n} out of 5">${n}</button>`).join("")}
+          </div>
+          <div class="scale-labels"><span>Not at all</span><span>Very confident</span></div>
+
+          <button type="button" class="primary" id="finish">Finish</button>
+          <p class="hint" id="continue-hint"></p>
+        </div>
+      `;
+
+      const choiceButtons = [...document.querySelectorAll("#shared-choice button")];
+      const scaleButtons = [...document.querySelectorAll("#scale button")];
+      const finishBtn = document.getElementById("finish");
+      const hint = document.getElementById("continue-hint");
+
+      function update() {
+        choiceButtons.forEach((btn) => {
+          btn.classList.toggle("selected", foundShared !== null && (btn.dataset.value === "yes") === foundShared);
+        });
+        scaleButtons.forEach((btn) => {
+          btn.classList.toggle("selected", Number(btn.dataset.value) === confidence);
+        });
+        finishBtn.disabled = foundShared === null || !confidence;
+        hint.textContent = finishBtn.disabled ? "Answer both questions to finish." : "";
+        saveState({ foundShared, confidenceAfter: confidence });
+      }
+
+      choiceButtons.forEach((btn) => {
+        btn.addEventListener("click", () => {
+          foundShared = btn.dataset.value === "yes";
+          update();
+        });
+      });
+
+      scaleButtons.forEach((btn) => {
+        btn.addEventListener("click", () => {
+          confidence = Number(btn.dataset.value);
+          update();
+        });
+      });
+
+      finishBtn.addEventListener("click", () => {
+        renderThanks(saveState({ finished: true }));
+        window.scrollTo(0, 0);
+      });
+
+      update();
+    }
+
+    function renderThanks(state) {
+      const before = state.confidenceBefore;
+      const after = state.confidenceAfter;
+      const change = after - before;
+      const changeText = change > 0 ? `Up ${change}` : change < 0 ? `Down ${-change}` : "No change";
+
+      app.innerHTML = `
+        <div class="card thanks">
+          <div class="thanks-badge">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>
+          </div>
+          <h1>Thanks, ${escapeHtml(state.name)}!</h1>
+          <p class="muted">You took the first step tonight. Here's your WarmUp.</p>
+
+          <div class="summary">
+            <div class="summary-item wide">
+              <p class="label">YOU MET</p>
+              <p class="summary-value">${escapeHtml(state.matchedWith)}</p>
+            </div>
+            <div class="summary-item">
+              <p class="label">SHARED INTEREST?</p>
+              <p class="summary-value">${state.foundShared ? "Yes" : "No"}</p>
+            </div>
+            <div class="summary-item">
+              <p class="label">CONFIDENCE</p>
+              <p class="summary-value">${before} &rarr; ${after} <span class="muted" style="font-size:14px;font-weight:500;">(${changeText})</span></p>
+            </div>
+          </div>
+
+          <div class="actions">
+            <button type="button" class="secondary" id="meet-another">Meet someone else</button>
+            <button type="button" class="primary" id="start-over">Start over</button>
+          </div>
+        </div>
+      `;
+
+      document.getElementById("meet-another").addEventListener("click", () => {
+        const current = loadState();
+        saveState({
+          matchIndex: (current.matchIndex || 0) + 1,
+          matchedWith: null,
+          sharedWith: null,
+          foundShared: null,
+          confidenceAfter: null,
+          finished: false
+        });
+        location.hash = "#match";
+      });
+
+      document.getElementById("start-over").addEventListener("click", resetDemo);
+    }
+
+    // ---------- Router ----------
+    const ROUTES = {
+      home: renderHome,
+      interests: renderInterests,
+      match: renderMatch,
+      wrapup: renderWrapup
+    };
+
+    const app = document.getElementById("app");
+
+    function router() {
+      const route = location.hash.replace("#", "") || "home";
+      const render = ROUTES[route] || ROUTES.home;
+      render();
+
+      document.querySelectorAll("nav a.tab").forEach((link) => {
+        link.classList.toggle("active", link.dataset.route === route);
+      });
+      window.scrollTo(0, 0);
+    }
+
+    window.addEventListener("hashchange", router);
+
+    function resetDemo() {
+      localStorage.removeItem(STORAGE_KEY);
+      if (location.hash === "#home") {
+        router();
+      } else {
+        location.hash = "#home";
+      }
+    }
+
+    document.getElementById("reset").addEventListener("click", resetDemo);
+
+    router();
+  </script>
+</body>
+</html>

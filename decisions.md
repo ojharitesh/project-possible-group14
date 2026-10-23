@@ -10,3 +10,11 @@
 - 2026-10-22 — If two people do not vibe, they get matched with someone else. Why: team said not vibing is a personal opinion and re-matching keeps them from feeling stuck.
 - 2026-10-22 — Captured potential features A–F (quick join, brief interest-sharing, pairing + re-match, adaptable activities/prompts, timed rotation, after-activity prompts/contact exchange) without prioritizing. Why: team said yes to all; prioritization deferred to Thursday's sprint.
 - 2026-10-22 — Out of scope: dating/romantic matching, general social-media feed, guaranteeing lasting friendships or mental-health support, and discovering/booking events or classes. Why: team selected A, B, C, D as deliberately not doing.
+- 2026-10-22 — Narrowed first version to students attending campus club events and socials; classes and other group settings are later expansion. Why: team adopted the PRD review recommendation to narrow the first use case, superseding the earlier broadening.
+- 2026-10-22 — Ice-breaker is organizer-led (club leader/event host starts it), not student-led, for the first version. Why: team chose "organizer" when presented with organizer-led vs. student-led vs. keep open.
+- 2026-10-22 — Success metrics defined as: participant reports discovering a genuine shared interest, plus confidence rated 1–5 before and after participating. Why: team adopted the PRD review's measurable version of the earlier B + D success choices; threshold for improvement remains [OPEN].
+- 2026-10-22 — v1 solves one job: "Quickly identify common interest". Why: team picked it as the core of WarmUp; it matches the shared-interest success metric. Other jobs moved to `prd/backlog.md`.
+- 2026-10-22 — v1 prototype has student screens only, with the event pre-set in sample data. Why: keeps it small enough for a 90-minute sprint; organizer flow is in the backlog.
+- 2026-10-22 — v1 is a single `repo-app-name/index.html` with fake sample data and browser local storage, no backend. Why: other students can try it on their own laptop with a double-click.
+- 2026-10-22 — No "[Sample]" label in the prototype UI. Why: team asked to remove it from the event name.
+- 2026-10-22 — Project name is WarmUp. Why: team said it fits helping students feel more comfortable starting conversations and finding common ground through low-pressure activities.

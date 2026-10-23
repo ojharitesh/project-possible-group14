@@ -5,11 +5,12 @@ Emails on file: ojha01@allegheny.edu (Ritesh), atreya_a2@denison.edu (Aaryan).
 
 # The project
 
-Project name: [OPEN]
-We help students at club fairs, socials, campus events, classes, and other group
-settings start and maintain conversations with new people. Leading candidate
-(not final): a structured, low-pressure ice-breaker activity used at the start
-of a setting, with re-matching if two people are not vibing.
+Project name: WarmUp
+We help students at campus club events and socials start and maintain
+conversations with new people. Leading candidate (not final): a structured,
+low-pressure, organizer-led ice-breaker activity used at the start of an
+event, with re-matching if two people are not vibing. Classes and other
+settings are later expansion.
 
 # How we work
 
